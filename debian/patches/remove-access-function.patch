@@ -1,0 +1,60 @@
+Description: <short summary of the patch>
+ TODO: Put a short summary on the line above and replace this paragraph
+ with a longer explanation of this change. Complete the meta-information
+ with other relevant fields (see below for details). To make it easier, the
+ information below has been extracted from the changelog. Adjust it or drop
+ it.
+ .
+ plasma-desktop (4:5.20.5-4+deb11u1.lnd.27) unstable; urgency=medium
+ .
+   * remove access function
+Author: Loongson <service@loongnix.cn>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: https://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: 2024-09-05
+
+--- plasma-desktop-5.20.5.orig/CMakeLists.txt
++++ plasma-desktop-5.20.5/CMakeLists.txt
+@@ -186,9 +186,9 @@ if(KAccounts_FOUND AND AccountsQt5_FOUND
+ endif()
+ add_subdirectory(imports/activitymanager/)
+ add_subdirectory(solid-device-automounter)
+-if(X11_Xkb_FOUND AND XCB_XKB_FOUND)
+-    add_subdirectory(kaccess)
+-endif()
++#if(X11_Xkb_FOUND AND XCB_XKB_FOUND)
++#    add_subdirectory(kaccess)
++#endif()
+ install(FILES org.kde.plasmashell.metainfo.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
+ 
+ # add clang-format target for all our real source files
+--- plasma-desktop-5.20.5.orig/kaccess/CMakeLists.txt
++++ plasma-desktop-5.20.5/kaccess/CMakeLists.txt
+@@ -1,5 +1,5 @@
+ # KI18N Translation Domain for this application
+-add_definitions(-DTRANSLATION_DOMAIN=\"kaccess\")
++#add_definitions(-DTRANSLATION_DOMAIN=\"kaccess\")
+ 
+ 
+ find_package(Phonon4Qt5 REQUIRED NO_MODULE)
+--- plasma-desktop-5.20.5.orig/kcms/CMakeLists.txt
++++ plasma-desktop-5.20.5/kcms/CMakeLists.txt
+@@ -8,7 +8,7 @@ if (EVDEV_FOUND AND XORGLIBINPUT_FOUND A
+     add_subdirectory( mouse )
+ endif()
+ 
+-add_subdirectory( access )
++#add_subdirectory( access )
+ add_subdirectory( dateandtime )
+ add_subdirectory( autostart )
+ add_subdirectory( ksplash )

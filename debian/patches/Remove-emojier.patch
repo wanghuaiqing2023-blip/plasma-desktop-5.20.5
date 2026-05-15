@@ -1,0 +1,11 @@
+--- plasma-desktop-5.20.5.orig/applets/kimpanel/backend/ibus/CMakeLists.txt
++++ plasma-desktop-5.20.5/applets/kimpanel/backend/ibus/CMakeLists.txt
+@@ -5,7 +5,7 @@ find_package(GObject)
+ 
+ if(IBUS_FOUND AND GLIB2_FOUND AND GIO_FOUND AND GOBJECT_FOUND)
+     include_directories(${IBUS_INCLUDE_DIR} ${GLIB2_INCLUDE_DIR})
+-    add_subdirectory(emojier)
++    #    add_subdirectory(emojier)
+ 
+     configure_file(config-kimpanel.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kimpanel.h)
+     find_package(Qt5X11Extras)

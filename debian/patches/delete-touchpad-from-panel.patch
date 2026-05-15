@@ -1,0 +1,11 @@
+--- plasma-desktop-5.20.5.orig/layout-templates/org.kde.plasma.desktop.defaultPanel/contents/layout.js
++++ plasma-desktop-5.20.5/layout-templates/org.kde.plasma.desktop.defaultPanel/contents/layout.js
+@@ -98,7 +98,7 @@ if (langIds.indexOf(languageId) != -1) {
+     panel.addWidget("org.kde.plasma.kimpanel");
+ }
+ 
+-panel.addWidget("touchpad")
++//panel.addWidget("touchpad")
+ panel.addWidget("org.kde.plasma.systemtray")
+ panel.addWidget("org.kde.plasma.digitalclock")
+ panel.addWidget("audoban.applet.separator")

@@ -1,0 +1,36 @@
+Description: <short summary of the patch>
+ TODO: Put a short summary on the line above and replace this paragraph
+ with a longer explanation of this change. Complete the meta-information
+ with other relevant fields (see below for details). To make it easier, the
+ information below has been extracted from the changelog. Adjust it or drop
+ it.
+ .
+ plasma-desktop (4:5.20.5-4+deb11u1.lnd.15) unstable; urgency=medium
+ .
+   * Set Folder View icons are arranged to Columns.
+Author: Loongson <service@loongnix.cn>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: https://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: 2024-06-21
+
+--- plasma-desktop-5.20.5.orig/containments/desktop/package/contents/config/main.xml
++++ plasma-desktop-5.20.5/containments/desktop/package/contents/config/main.xml
+@@ -52,7 +52,7 @@
+ 
+     <entry name="arrangement" type="Int">
+       <label>How Folder View icons are arranged: 0 = Rows, 1 = Columns</label>
+-      <default>0</default>
++      <default>1</default>
+     </entry>
+     <entry name="alignment" type="Int">
+       <label>How Folder View icons are aligned: 0 = Left, 1 = Right</label>

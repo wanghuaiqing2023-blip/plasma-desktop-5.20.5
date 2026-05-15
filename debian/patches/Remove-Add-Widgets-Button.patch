@@ -1,0 +1,61 @@
+Description: <short summary of the patch>
+ TODO: Put a short summary on the line above and replace this paragraph
+ with a longer explanation of this change. Complete the meta-information
+ with other relevant fields (see below for details). To make it easier, the
+ information below has been extracted from the changelog. Adjust it or drop
+ it.
+ .
+ plasma-desktop (4:5.20.5-4+deb11u1.lnd.35) unstable; urgency=medium
+ .
+   * Remove add Widgets Button
+Author: Loongson <service@loongnix.cn>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: https://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: 2025-03-03
+
+--- plasma-desktop-5.20.5.orig/desktoppackage/contents/configuration/panelconfiguration/ToolBar.qml
++++ plasma-desktop-5.20.5/desktoppackage/contents/configuration/panelconfiguration/ToolBar.qml
+@@ -67,17 +67,6 @@ Item {
+         columnSpacing: units.smallSpacing
+ 
+         PlasmaComponents.Button {
+-            text: buttonsLayout_2.showText ? root.addWidgetsButtonText : ""
+-            tooltip: buttonsLayout_2.showText ? "" : root.addWidgetsButtonText
+-            iconSource: "list-add"
+-            Layout.fillWidth: true
+-            onClicked: {
+-                configDialog.close();
+-                configDialog.showAddWidgetDialog();
+-            }
+-        }
+-
+-        PlasmaComponents.Button {
+             iconSource: "distribute-horizontal-x"
+             text: buttonsLayout_2.showText ? root.addSpacerButtonText : ""
+             tooltip: buttonsLayout_2.showText ? "" : root.addSpacerButtonText
+--- plasma-desktop-5.20.5.orig/toolboxes/desktoptoolbox/contents/ui/ToolBoxButton.qml
++++ plasma-desktop-5.20.5/toolboxes/desktoptoolbox/contents/ui/ToolBoxButton.qml
+@@ -200,13 +200,6 @@ Item {
+             anchors.centerIn: parent
+             spacing: units.smallSpacing
+ 
+-
+-            PlasmaComponents3.ToolButton {
+-                property QtObject qAction: plasmoid.action("add widgets")
+-                text: qAction.text
+-                icon.name: "list-add"
+-                onClicked: qAction.trigger()
+-            }
+             PlasmaComponents3.ToolButton {
+                 property QtObject qAction: plasmoid.globalAction("manage activities")
+                 text: qAction.text

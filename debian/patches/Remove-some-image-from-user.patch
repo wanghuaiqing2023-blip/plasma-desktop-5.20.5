@@ -1,0 +1,26 @@
+--- plasma-desktop-5.20.5.orig/kcms/users/package/contents/ui/UserDetailsPage.qml
++++ plasma-desktop-5.20.5/kcms/users/package/contents/ui/UserDetailsPage.qml
+@@ -307,23 +307,6 @@ SimpleKCM {
+ 
+                     Repeater {
+                         model: [
+-                            "Artist Konqi.png",
+-                            "Bookworm Konqi.png",
+-                            "Boss Konqi.png",
+-                            "Bug Catcher Konqi.png",
+-                            "Card Shark Konqi.png",
+-                            "Hacker Konqi.png",
+-                            "Journalist Konqi.png",
+-                            "Katie.png",
+-                            "Konqi.png",
+-                            "Mechanic Konqi.png",
+-                            "Messenger Konqi.png",
+-                            "Musician Konqi.png",
+-                            "Office Worker Konqi.png",
+-                            "PC Builder Konqi.png",
+-                            "Scientist Konqi.png",
+-                            "Teacher Konqi.png",
+-                            "Virtual Reality Konqi.png",
+                             "photos/Air Balloon.png",
+                             "photos/Astronaut.png",
+                             "photos/Books.png",

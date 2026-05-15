@@ -1,0 +1,11 @@
+--- plasma-desktop-5.20.5.orig/kcms/workspaceoptions/workspaceoptions_kdeglobalssettings.kcfg
++++ plasma-desktop-5.20.5/kcms/workspaceoptions/workspaceoptions_kdeglobalssettings.kcfg
+@@ -11,7 +11,7 @@
+     </entry>
+     <entry name="animationDurationFactor" key="AnimationDurationFactor" type="Double">
+       <label>Animation speed</label>
+-      <default>1.0</default>
++      <default>0.7071067811865475</default>
+     </entry>
+     <entry name="scrollbarLeftClickNavigatesByPage" key="ScrollbarLeftClickNavigatesByPage" type="Bool">
+       <label>Left-click in scrollbar track moves scrollbar by one page</label>

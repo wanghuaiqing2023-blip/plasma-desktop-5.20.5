@@ -1,0 +1,36 @@
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: 2024-08-26
+
+--- plasma-desktop-5.20.5.orig/desktoppackage/contents/configuration/ConfigurationContainmentAppearance.qml
++++ plasma-desktop-5.20.5/desktoppackage/contents/configuration/ConfigurationContainmentAppearance.qml
+@@ -117,17 +117,17 @@ ColumnLayout {
+                     root.configurationChanged()
+                 }
+             }
+-            QtControls.Button {
+-                icon.name: "get-hot-new-stuff"
+-                text: i18nd("plasma_shell_org.kde.plasma.desktop", "Get New Plugins...")
+-                visible: KAuthorized.authorize("ghns")
+-                onClicked: wallpaperPlugin.getNewWallpaperPlugin(this)
+-                Layout.preferredHeight: wallpaperComboBox.height
+-
+-                ShellPrivate.WallpaperPlugin {
+-                    id: wallpaperPlugin
+-                }
+-            }
++//            QtControls.Button {
++//                icon.name: "get-hot-new-stuff"
++//                text: i18nd("plasma_shell_org.kde.plasma.desktop", "Get New Plugins...")
++//                visible: KAuthorized.authorize("ghns")
++//                onClicked: wallpaperPlugin.getNewWallpaperPlugin(this)
++//                Layout.preferredHeight: wallpaperComboBox.height
++//
++//                ShellPrivate.WallpaperPlugin {
++//                    id: wallpaperPlugin
++//                }
++//            }
+         }
+     }
+ 

@@ -1,0 +1,63 @@
+Description: <short summary of the patch>
+ TODO: Put a short summary on the line above and replace this paragraph
+ with a longer explanation of this change. Complete the meta-information
+ with other relevant fields (see below for details). To make it easier, the
+ information below has been extracted from the changelog. Adjust it or drop
+ it.
+ .
+ plasma-desktop (4:5.20.5-4+deb11u1.lnd.7) unstable; urgency=medium
+ .
+   * 删除桌面右键菜单项中的图标/{显示锁定，已锁定}
+Author: Loongson <service@loongnix.cn>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: https://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: 2024-05-16
+
+--- plasma-desktop-5.20.5.orig/containments/desktop/plugins/folder/viewpropertiesmenu.cpp
++++ plasma-desktop-5.20.5/containments/desktop/plugins/folder/viewpropertiesmenu.cpp
+@@ -96,9 +96,11 @@ ViewPropertiesMenu::ViewPropertiesMenu(Q
+ 
+     m_previews = m_menu->addAction(QIcon::fromTheme(QStringLiteral("view-preview")), i18n("Show Previews"), this, &ViewPropertiesMenu::previewsChanged);
+     m_previews->setCheckable(true);
++    m_previews->setVisible(false);
+ 
+     m_locked = m_menu->addAction(QIcon::fromTheme(QStringLiteral("lock")), i18n("Locked"), this, &ViewPropertiesMenu::lockedChanged);
+     m_locked->setCheckable(true);
++    m_locked->setVisible(false);
+ }
+ 
+ ViewPropertiesMenu::~ViewPropertiesMenu()
+@@ -128,16 +130,17 @@ void ViewPropertiesMenu::setShowLayoutAc
+ 
+ bool ViewPropertiesMenu::showLockAction() const
+ {
+-    return m_locked->isVisible();
++//    return m_locked->isVisible();
++    return false;
+ }
+ 
+ void ViewPropertiesMenu::setShowLockAction(bool show)
+ {
+-    if (m_locked->isVisible() != show) {
+-        m_locked->setVisible(show);
+-
+-        emit showLockActionChanged();
+-    }
++//    if (m_locked->isVisible() != show) {
++//        m_locked->setVisible(show);
++//
++//        emit showLockActionChanged();
++//    }
+ }
+ 
+ bool ViewPropertiesMenu::showIconSizeActions() const

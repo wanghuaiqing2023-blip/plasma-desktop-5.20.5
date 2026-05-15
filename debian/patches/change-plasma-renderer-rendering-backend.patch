@@ -1,0 +1,75 @@
+--- plasma-desktop-5.20.5.orig/kcms/qtquicksettings/kcmqtquicksettings.cpp
++++ plasma-desktop-5.20.5/kcms/qtquicksettings/kcmqtquicksettings.cpp
+@@ -22,6 +22,8 @@
+ #include <KPluginFactory>
+ #include <KAboutData>
+ #include <QDebug>
++#include <iostream>
++#include <fstream>
+ 
+ #include "ui_kcmqtquicksettingswidget.h"
+ #include "renderersettings.h"
+@@ -41,10 +43,25 @@ KCMQtQuickSettingsModule::KCMQtQuickSett
+     about->addAuthor(i18n("David Edmundson"), i18n("Maintainer"), QStringLiteral("davidedmundson@kde.org"));
+     setAboutData(about);
+ 
++    setSceneGraphBackendBasedOnFbFile();
+     m_ui->setupUi(this);
+     addConfig(m_settings.get(), this);
+ }
+ 
++void KCMQtQuickSettingsModule::setSceneGraphBackendBasedOnFbFile(){
++    std::ifstream fbFile("/proc/fb");
++    std::string fbContent;
++    if(fbFile.is_open()){
++       std::getline(fbFile, fbContent);
++       fbFile.close();
++    }
++
++    PlasmaQtQuickSettings::RendererSettings::SceneGraphBackendType v = static_cast<PlasmaQtQuickSettings::RendererSettings::SceneGraphBackendType>(((fbContent == "0 loonggpudrmfb") || (fbContent == "0 gsgpudrmfb")) ? 1 : 0);
++
++    m_settings->setSceneGraphBackend(v);
++    m_settings->save();
++}
++
+ KCMQtQuickSettingsModule::~KCMQtQuickSettingsModule()
+ {
+ }
+--- plasma-desktop-5.20.5.orig/kcms/qtquicksettings/kcmqtquicksettings.h
++++ plasma-desktop-5.20.5/kcms/qtquicksettings/kcmqtquicksettings.h
+@@ -45,6 +45,7 @@ public:
+     ~KCMQtQuickSettingsModule() override;
+ 
+ private:
++    void setSceneGraphBackendBasedOnFbFile();
+     QScopedPointer<Ui::KCMQtQuickSettingsWidget> m_ui;
+     QScopedPointer<PlasmaQtQuickSettings::RendererSettings> m_settings;
+ };
+--- plasma-desktop-5.20.5.orig/kcms/qtquicksettings/kcmqtquicksettingswidget.ui
++++ plasma-desktop-5.20.5/kcms/qtquicksettings/kcmqtquicksettingswidget.ui
+@@ -43,11 +43,6 @@
+       <widget class="QComboBox" name="kcfg_SceneGraphBackend">
+        <item>
+         <property name="text">
+-         <string>Automatic</string>
+-        </property>
+-       </item>
+-       <item>
+-        <property name="text">
+          <string>Open GL</string>
+         </property>
+        </item>
+--- plasma-desktop-5.20.5.orig/kcms/qtquicksettings/renderer.kcfg
++++ plasma-desktop-5.20.5/kcms/qtquicksettings/renderer.kcfg
+@@ -15,11 +15,9 @@
+         </entry>
+         <entry name="SceneGraphBackend" type="Enum">
+             <choices name="SceneGraphBackendType">
+-                <choice name="automaticbackend" />
+                 <choice name="opengl" />
+                 <choice name="software" />
+             </choices>
+-            <default>automaticbackend</default>
+         </entry>
+         <entry name="ForceGlCoreProfile" type="Bool">
+             <default>false</default>

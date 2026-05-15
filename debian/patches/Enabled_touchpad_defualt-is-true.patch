@@ -1,0 +1,37 @@
+Last-Update: 2024-06-20
+
+--- plasma-desktop-5.20.5.orig/kcms/touchpad/backends/x11/libinputtouchpad.cpp
++++ plasma-desktop-5.20.5/kcms/touchpad/backends/x11/libinputtouchpad.cpp
+@@ -19,7 +19,10 @@
+ #include "libinputtouchpad.h"
+ #include "logging.h"
+ 
++#include <QDir>
++#include <QFile>
+ #include <QSet>
++#include <QStandardPaths>
+ 
+ #include <stddef.h>
+ #include <limits.h>
+@@ -188,7 +191,20 @@ LibinputTouchpad::LibinputTouchpad(Displ
+         m_tapFingerCount.avail = true;
+         m_tapFingerCount.set(1);
+     }
+-    m_config = KSharedConfig::openConfig(QStringLiteral("touchpadxlibinputrc"));
++    QFile desFile(QStandardPaths::writableLocation(QStandardPaths::HomeLocation) +"/.config/touchpadxlibinputrc");
++    if (desFile.exists()) {
++    	m_config = KSharedConfig::openConfig(QStringLiteral("touchpadxlibinputrc"));
++    } else {
++	m_tapToClick.val = true;
++        m_tapToClick.set(1);
++	m_pointerAcceleration.val = 1;
++	m_pointerAcceleration.set(1);
++	m_config = KSharedConfig::openConfig(QStringLiteral("touchpadxlibinputrc"));
++	valueWriter(m_tapToClick);    
++        flush();	
++	valueWriter(m_pointerAcceleration);
++        flush();	
++    }
+ }
+ 
+ bool LibinputTouchpad::getConfig()

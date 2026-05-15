@@ -1,0 +1,39 @@
+--- plasma-desktop-5.20.5.orig/kcms/workspaceoptions/workspaceoptions_kdeglobalssettings.kcfg
++++ plasma-desktop-5.20.5/kcms/workspaceoptions/workspaceoptions_kdeglobalssettings.kcfg
+@@ -3,6 +3,9 @@
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
++  <include>iostream</include>
++  <include>fstream</include>
++  <include>string</include>
+   <kcfgfile name="kdeglobals" />
+   <group name="KDE">
+     <entry name="singleClick" key="SingleClick" type="Bool">
+@@ -11,7 +14,25 @@
+     </entry>
+     <entry name="animationDurationFactor" key="AnimationDurationFactor" type="Double">
+       <label>Animation speed</label>
+-      <default>0.7071067811865475</default>
++      <default code="true">
++        [this] {
++          std::ifstream fbFile("/proc/cpuinfo");
++          std::string line;
++          bool val = false;
++          if (fbFile.is_open()) {
++            while(std::getline(fbFile, line)){
++              if(line.find("Loongson-2K") != std::string::npos){
++                val = true;
++                break;
++              }
++            }
++            fbFile.close();
++          }else{
++            return 0.7071067811865475;
++          }
++            return val ? 0 : 0.7071067811865475;
++        }()
++      </default>
+     </entry>
+     <entry name="scrollbarLeftClickNavigatesByPage" key="ScrollbarLeftClickNavigatesByPage" type="Bool">
+       <label>Left-click in scrollbar track moves scrollbar by one page</label>

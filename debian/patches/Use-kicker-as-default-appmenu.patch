@@ -1,0 +1,16 @@
+--- plasma-desktop-5.20.5.orig/layout-templates/org.kde.plasma.desktop.defaultPanel/contents/layout.js
++++ plasma-desktop-5.20.5/layout-templates/org.kde.plasma.desktop.defaultPanel/contents/layout.js
+@@ -42,9 +42,10 @@ if (panel.formFactor === "horizontal") {
+     }
+ }
+ 
+-var kickoff = panel.addWidget("org.kde.plasma.kickoff")
+-kickoff.currentConfigGroup = ["Shortcuts"]
+-kickoff.writeConfig("global", "Alt+F1")
++//var kickoff = panel.addWidget("org.kde.plasma.kickoff")
++//kickoff.currentConfigGroup = ["Shortcuts"]
++//kickoff.writeConfig("global", "Alt+F1")
++panel.addWidget("org.kde.plasma.kicker")
+ 
+ //panel.addWidget("org.kde.plasma.showActivityManager")
+ panel.addWidget("org.kde.plasma.pager")

@@ -1,0 +1,71 @@
+Last-Update: 2024-05-18
+
+--- plasma-desktop-5.20.5.orig/kcms/workspaceoptions/package/contents/ui/main.qml
++++ plasma-desktop-5.20.5/kcms/workspaceoptions/package/contents/ui/main.qml
+@@ -122,36 +122,45 @@ KCM.SimpleKCM {
+         QQC2.ButtonGroup { id: singleClickGroup }
+ 
+         QQC2.RadioButton {
+-            id: singleClick
+             Kirigami.FormData.label: i18n("Click behavior:")
+-            text: i18n("Single-click to open files and folders")
+-            checked: kcm.globalsSettings.singleClick
+-            onToggled: kcm.globalsSettings.singleClick = true
++            text: i18n("Double-click to open files and folders")
++            checked: !kcm.globalsSettings.singleClick
++            onToggled: kcm.globalsSettings.singleClick = false
+             QQC2.ButtonGroup.group: singleClickGroup
+ 
+             KCM.SettingStateBinding {
+                 configObject: kcm.globalsSettings
+                 settingName: "singleClick"
++                extraEnabledConditions: singleClick.enabled
+             }
+         }
+ 
++        QQC2.Label {
++            Layout.fillWidth: true
++            text: i18n("Select by single-clicking")
++            elide: Text.ElideRight
++            font: theme.smallestFont
++       }
++       // Item {
++       //     Kirigami.FormData.isSection: false
++       // }
++
+         QQC2.RadioButton {
+-            id: doubleClick
+-            text: i18n("Double-click to open files and folders")
+-            checked: !kcm.globalsSettings.singleClick
+-            onToggled: kcm.globalsSettings.singleClick = false
++            id: singleClick
++            text: i18n("Single-click to open files and folders")
++            checked: kcm.globalsSettings.singleClick
++            onToggled: kcm.globalsSettings.singleClick = true
+             QQC2.ButtonGroup.group: singleClickGroup
+ 
+             KCM.SettingStateBinding {
+                 configObject: kcm.globalsSettings
+                 settingName: "singleClick"
+-                extraEnabledConditions: singleClick.enabled
+             }
+         }
+ 
+         QQC2.Label {
+             Layout.fillWidth: true
+-            text: singleClick.checked ? i18n("Select by clicking on item's selection marker") : i18n("Select by single-clicking")
++            text: i18n("Select by clicking on item's selection marker")
+             elide: Text.ElideRight
+             font: theme.smallestFont
+         }
+--- plasma-desktop-5.20.5.orig/kcms/workspaceoptions/workspaceoptions_kdeglobalssettings.kcfg
++++ plasma-desktop-5.20.5/kcms/workspaceoptions/workspaceoptions_kdeglobalssettings.kcfg
+@@ -7,7 +7,7 @@
+   <group name="KDE">
+     <entry name="singleClick" key="SingleClick" type="Bool">
+       <label>Single click to open files</label>
+-      <default>true</default>
++      <default>false</default>
+     </entry>
+     <entry name="animationDurationFactor" key="AnimationDurationFactor" type="Double">
+       <label>Animation speed</label>

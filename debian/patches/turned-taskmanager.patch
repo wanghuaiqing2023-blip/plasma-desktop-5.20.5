@@ -1,0 +1,67 @@
+Description: <short summary of the patch>
+ TODO: Put a short summary on the line above and replace this paragraph
+ with a longer explanation of this change. Complete the meta-information
+ with other relevant fields (see below for details). To make it easier, the
+ information below has been extracted from the changelog. Adjust it or drop
+ it.
+ .
+ plasma-desktop (4:5.20.5-4+deb11u1.lnd.17) unstable; urgency=medium
+ .
+   * 悬停时高亮
+   * 默认展示窗口效果
+   * 默认进行任务栏分组
+Author: Loongson <service@loongnix.cn>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: https://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: 2024-06-22
+
+--- plasma-desktop-5.20.5.orig/applets/taskmanager/package/contents/config/main.xml
++++ plasma-desktop-5.20.5/applets/taskmanager/package/contents/config/main.xml
+@@ -28,7 +28,7 @@
+     </entry>
+     <entry name="groupedTaskVisualization" type="Enum">
+       <label>What happens when clicking on a grouped task: 0 = cycle through grouped tasks, 1 = try to show tooltips, 2 = try to show present Windows effect, 3 = show textual list (AKA group dialog)</label>
+-      <default>0</default>
++      <default>2</default>
+     </entry>
+     <entry name="groupPopups" type="Bool">
+       <label>Whether groups are to be reduced to a single task button and expand into a popup or task buttons are grouped on the widget itself.</label>
+@@ -36,7 +36,7 @@
+     </entry>
+     <entry name="onlyGroupWhenFull" type="Bool">
+       <label>Whether to group always or only when the widget runs out of space to show additional task buttons comfortably.</label>
+-      <default>true</default>
++      <default>false</default>
+     </entry>
+     <entry name="groupingAppIdBlacklist" type="StringList">
+       <label>The id's (usually .desktop file names) of applications that should not have their tasks grouped.</label>
+@@ -73,7 +73,7 @@
+     </entry>
+     <entry name="highlightWindows" type="Bool">
+       <label>Whether to request the window manager highlight windows when hovering corresponding task buttons.</label>
+-      <default>false</default>
++      <default>true</default>
+     </entry>
+     <entry name="launchers" type="StringList">
+       <label>The list of launcher tasks on the widget. Usually .desktop file or executable URLs. Special URLs such as preferred://browser that expand to default applications are supported.</label>
+--- plasma-desktop-5.20.5.orig/applets/taskmanager/plugin/backend.cpp
++++ plasma-desktop-5.20.5/applets/taskmanager/plugin/backend.cpp
+@@ -58,7 +58,7 @@ using namespace KAStats::Terms;
+ 
+ Backend::Backend(QObject* parent) : QObject(parent)
+     , m_panelWinId(0)
+-    , m_highlightWindows(false)
++    , m_highlightWindows(true)
+     , m_actionGroup(new QActionGroup(this))
+ {
+ }
