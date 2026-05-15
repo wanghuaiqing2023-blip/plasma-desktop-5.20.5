@@ -76,7 +76,7 @@
     </entry>
     <entry name="toolTips" type="Bool">
       <label>Whether to show info tooltips when hovering Folder View icons.</label>
-      <default>false</default>
+      <default>true</default>
     </entry>
     <entry name="selectionMarkers" type="Bool">
       <label>Whether to show selection markers when hovering Folder View icons.</label>

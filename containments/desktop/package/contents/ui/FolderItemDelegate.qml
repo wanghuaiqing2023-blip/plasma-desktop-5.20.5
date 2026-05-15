@@ -157,7 +157,7 @@ Item {
             PlasmaCore.ToolTipArea {
                 id: toolTip
 
-                active: (plasmoid.configuration.toolTips && popupDialog == null && !model.blank)
+                active: (plasmoid.configuration.toolTips && label.truncated && popupDialog == null && !model.blank)
                 interactive: false
                 location: root.useListViewMode ? (plasmoid.location === PlasmaCore.Types.LeftEdge ? PlasmaCore.Types.LeftEdge : PlasmaCore.Types.RightEdge) : plasmoid.location
 
